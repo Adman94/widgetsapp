@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Accordion({ items }) {
+const Accordion = ({ items }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const onTitleClick = index => {

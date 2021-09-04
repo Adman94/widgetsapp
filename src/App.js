@@ -1,23 +1,26 @@
 import './App.css';
-// import Accordion from './components/Accordion';
-// import Search from './components/Search';
+import Accordion from './components/Accordion';
+import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import { useState } from 'react';
 import Translate from './components/Translate';
+import Header from './components/Header';
+import Route from './components/Route';
 
-// const items = [
-//   {
-//     title: 'What is React',
-//     content: 'React is a front end JavaScript framework'
-//   },
-//   {
-//     title: 'Why use React',
-//     content: 'React is a favorite JS Librarty among engineers'
-//   }, {
-//     title: 'How do you use React',
-//     content: 'You use React by creating components'
-//   }
-// ]
+const items = [
+  {
+    title: 'What is React',
+    content: 'React is a front end JavaScript framework'
+  },
+  {
+    title: 'Why use React',
+    content: 'React is a favorite JS Librarty among engineers'
+  }, {
+    title: 'How do you use React',
+    content: 'You use React by creating components'
+  }
+]
+
 const options = [
   {
     label: 'The Color Red',
@@ -33,23 +36,61 @@ const options = [
   }
 ]
 
+// const showAccordion = () => {
+//   if (window.location.pathname === '/') {
+//     return <Accordion items={items} />
+//   }
+// }
+
+// const showList = () => {
+//   if (window.location.pathname === '/list') {
+//     return <Search />
+//   }
+// }
+
+const showDropdown = () => {
+  if (window.location.pathname === '/dropdown') {
+    return <Dropdown />
+  }
+}
+
+// const showTranslate = () => {
+//   if (window.location.pathname === '/translate') {
+//     return <Translate />
+//   }
+// }
+
+
 function App() {
   const [selected, setSelected] = useState(options[0]);
   // const [showDropdown, setShowDropdown] = useState(true);
   return (
     <div>
       {/* <br /> */}
-      {/* <Accordion items={items} /> */}
       {/* <Search /> */}
       {/* <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-      {showDropdown ?
-        <Dropdown
-          selected={selected}
-          onSelectedChange={setSelected}
-          options={options}
-        /> : null
-      } */}
-      <Translate />
+       */}
+      <Header />
+
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
+        {showDropdown ?
+          <Dropdown
+            label="Select a Color"
+            selected={selected}
+            onSelectedChange={setSelected}
+            options={options}
+          /> : null
+        }
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 }
